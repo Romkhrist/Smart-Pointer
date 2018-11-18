@@ -20,7 +20,7 @@ public:
     
     ~smart_ptr();
     
-    //deleted members
+    //forbidden members
     smart_ptr(smart_ptr&& ptr) = delete;
     smart_ptr& operator=(smart_ptr&& ptr) = delete;
 };

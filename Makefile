@@ -1,6 +1,6 @@
 .PHONY: all install uninstall clean
 
-CPPC = g++
+CXX = g++
 CFLAGS = -c -Wall
 TARGET = smart_ptr
 SRCS = main.cpp
@@ -10,17 +10,16 @@ INSTALL_PATH = ~/bin
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CPPC) -o $@ $^
+	@$(CXX) $(LDFLAGS) -o $@ $^
 	
-$(OBJS): $(SRCS)
-	$(CPPC) $(CFLAGS) $^
+$(OBJS): $(SRCS) $(TARGET).h
 
-install: $(TARGET)
-	install -D -m 744 $^ $(INSTALL_PATH)/$^
-	$(MAKE) clean
+install:
+	-@install -D -m 744 $^ $(INSTALL_PATH)/$^
+	@$(MAKE) clean
 		
-uninstall: $(TARGET)
-	rm -rf $(INSTALL_PATH)/$^
+uninstall:
+	@rm -rf $(INSTALL_PATH)/$^
 	
 clean:
-	rm -rf $(TARGET) *.o 
+	@rm -rf $(TARGET) *.o 
